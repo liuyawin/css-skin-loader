@@ -1,0 +1,17 @@
+{
+  "name": "css-skin-loader",
+  "version": "1.0.0",
+  "description": "This is a skin loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "skin"
+  ],
+  "author": "liuyawin",
+  "license": "ISC",
+  "devDependencies": {
+    "loader-utils": "^1.2.3"
+  }
+}
