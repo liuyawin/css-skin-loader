@@ -1,21 +1,24 @@
 const fs = require('fs');
+const path = require('path');
 const minimist = require("minimist");
 const loaderUtil = require('loader-utils');
 
 module.exports = function (source) {
     const options = loaderUtil.getOptions(this);
     const skinName = minimist(process.argv.slice(2)).skin;
+    const configPath = options && options.configPath ? `${this.rootContext}/${options.configPath}` 
+                        : `${this.rootContext}/.skinconfig`;
 
     let callback = this.async();
-    fs.readFile(this.rootContext + '/.skinconfig', 'utf-8', (err, data) => {
+    fs.readFile(configPath, 'utf-8', (err, data) => {
         const skinConfig = JSON.parse(data);
         let skinData = skinConfig[skinName];
-        if (!skinData) {
-            skinData = skinConfig[options.defaultSkinName];
+        if (options && !skinData) {
+            skinData = skinConfig[options.skinName];
         }
         if (!skinData) {
             console.warn('没有找到对应的皮肤信息');
-            return;
+            return source;
         }
 
         const filePath = this.resourcePath;
@@ -25,7 +28,7 @@ module.exports = function (source) {
         //取出单独定义的样式
         for (const key in component) {
             if (component.hasOwnProperty(key)) {
-                if (filePath.indexOf(key) > -1) {
+                if (filePath.indexOf(path.join('/' + key + '/')) > -1) {
                     cAttr = component[key];
                     break;
                 }

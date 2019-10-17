@@ -1,5 +1,5 @@
 # 用法
-css
+css：
 ```
 .container{
     width: 80px;
@@ -24,11 +24,12 @@ css
 {
     loader: 'css-skin-loader',
     options: {
-        defaultSkinName: 'gray'
+        skinName: 'gray',
+        configPath: '.skinconfig'
     }
 }
 ```
-其中defaultSkinName为默认皮肤。打包后结果为：
+其中skinName为默认皮肤，configPath为默认的配置文件名，配置文件放在项目的最外层。打包后结果为：
 ```
 .container{
     width: 80px;
