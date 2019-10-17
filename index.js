@@ -1,14 +1,18 @@
 const fs = require('fs');
+const minimist = require("minimist");
 const loaderUtil = require('loader-utils');
 
 module.exports = function (source) {
-    const skinName = require("minimist")(process.argv.slice(2)).skin;
+    const options = loaderUtil.getOptions(this);
+    const skinName = minimist(process.argv.slice(2)).skin;
 
     let callback = this.async();
     fs.readFile(this.rootContext + '/.skinconfig', 'utf-8', (err, data) => {
         const skinConfig = JSON.parse(data);
         let skinData = skinConfig[skinName];
-
+        if (!skinData) {
+            skinData = skinConfig[options.defaultSkinName];
+        }
         if (!skinData) {
             console.warn('没有找到对应的皮肤信息');
             return;

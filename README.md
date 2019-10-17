@@ -24,16 +24,17 @@ css
 {
     loader: 'css-skin-loader',
     options: {
-        skinName: skin,
         defaultSkinName: 'gray'
     }
 }
 ```
-其中skin为皮肤的名字，defaultSkinName为默认皮肤。打包后结果为：
+其中defaultSkinName为默认皮肤。打包后结果为：
 ```
-width: 80px;
-height: 120px;
-color: #8A2BE2;
-background-color: #FF4040;
-border: 1px solid #333333;
+.container{
+    width: 80px;
+    height: 120px;
+    color: #8A2BE2;
+    background-color: #FF4040;
+    border: 1px solid #333333;
+}
 ```
